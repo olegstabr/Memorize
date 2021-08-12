@@ -9,48 +9,66 @@ import SwiftUI
 
 struct ContentView: View {
 	var vehicleEmojis = ["🚁", "🚗", "✈️", "🛳", "🚄",  "🛸",  "🚀",  "⛵️",
-		"🚲",  "🛵",  "🛴",  "🏍",  "🚃",  "🚒",  "🚑",  "🚌",  "🚎",  "🚓",  "🚕",  "🚜", ]
-	@State var emojiCount = 4
+		"🚲",  "🛵",  "🛴",  "🏍",  "🚃",  "🚒",  "🚑",  "🚌",  "🚎",  "🚓",  "🚕",  "🚜", "🛻", "🛺", "🚇", "🛶"]
+	var peopleEmojis = ["👶", "👩", "👨🏽‍🦰", "🧔‍♀️", "👨‍🦳", "👮", "🕵️‍♀️", "👩‍🌾", "💂‍♀️", "👨‍⚕️", "👨‍🎓", "👩‍🏫", "👨‍💻", "👩‍🚒", "🧑‍🚀", "🧑‍⚖️", "🧙", "🧛‍♀️"]
+	var animalEmojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐸", "🐤", "🦅"]
+	@State var usedEmojis = ["🚁", "🚗", "✈️", "🛳", "🚄",  "🛸",  "🚀",  "⛵️",
+							 "🚲",  "🛵",  "🛴",  "🏍",  "🚃",  "🚒",  "🚑",  "🚌",  "🚎",  "🚓",  "🚕",  "🚜", "🛻", "🛺", "🚇", "🛶"]
+	@State var emojiCount = 14
 	
     var body: some View {
 		VStack {
-			HStack {
-				ForEach(vehicleEmojis[0..<emojiCount], id: \.self) { vehicle in
-					CardView(content: vehicle)
+			Text("Memorize!").font(.largeTitle)
+			ScrollView {
+				LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+					ForEach(usedEmojis[0..<emojiCount], id: \.self) { emoji in
+						CardView(content: emoji).aspectRatio(2/3, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+					}
 				}
 			}
+			.foregroundColor(.red)
 			Spacer(minLength: 20)
 			HStack {
-				remove
+				CreateThemeButton(themeName: "Vehicles")
 				Spacer()
-				add
+				CreateThemeButton(themeName: "People")
+				Spacer()
+				CreateThemeButton(themeName: "Animals")
 			}
 			.padding(.horizontal)
 			.font(.largeTitle)
 		}
 		.padding(.horizontal)
-		.foregroundColor(.red)
     }
 	
-	var remove: some View {
-		Button(action: {
-			if emojiCount == 0 {
-				return
-			}
-			emojiCount -= 1
+	func CreateThemeButton(themeName: String) -> some View {
+		var imageSystemName: String
+		var needShowTypeEmojis: [String]
+		
+		switch themeName {
+		case "Animals":
+			imageSystemName = "hare"
+			needShowTypeEmojis = animalEmojis
+		case "People":
+			imageSystemName = "person"
+			needShowTypeEmojis = peopleEmojis
+		case "Vehicles":
+			imageSystemName = "car"
+			needShowTypeEmojis = vehicleEmojis
+		default:
+			imageSystemName = "questionmark.circle"
+			needShowTypeEmojis = animalEmojis
+		}
+		
+		return Button(action: {
+			usedEmojis = needShowTypeEmojis
+			usedEmojis.shuffle()
+			emojiCount = Int.random(in: 0..<usedEmojis.count)
 		}, label: {
-			Image(systemName: "minus.circle")
-		})
-	}
-	
-	var add: some View {
-		Button(action: {
-			if emojiCount == vehicleEmojis.count {
-				return
+			VStack {
+				Image(systemName: imageSystemName)
+				Text(themeName).font(.title2)
 			}
-			emojiCount += 1
-		}, label: {
-			Image(systemName: "plus.circle")
 		})
 	}
 }
@@ -71,7 +89,7 @@ struct CardView: View {
 				
 			if isFaceUp {
 				shape.fill().foregroundColor(.white)
-				shape.stroke(lineWidth: 3)
+				shape.strokeBorder(lineWidth: 4)
 				Text(content).font(.largeTitle)
 			}
 			else {
