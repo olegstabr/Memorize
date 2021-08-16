@@ -13,6 +13,7 @@
 		0C6BF47926BFEFD400B68250 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6BF47826BFEFD400B68250 /* Preview Assets.xcassets */; };
 		0C6BF48426BFEFD400B68250 /* MemorizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6BF48326BFEFD400B68250 /* MemorizeTests.swift */; };
 		0C6BF48F26BFEFD400B68250 /* MemorizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6BF48E26BFEFD400B68250 /* MemorizeUITests.swift */; };
+		0C9CA89426CA7A35002792E7 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CA89326CA7A35002792E7 /* MemoryGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		0C6BF48A26BFEFD400B68250 /* MemorizeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemorizeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6BF48E26BFEFD400B68250 /* MemorizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITests.swift; sourceTree = "<group>"; };
 		0C6BF49026BFEFD400B68250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C9CA89326CA7A35002792E7 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				0C6BF47526BFEFD400B68250 /* Assets.xcassets */,
 				0C6BF47A26BFEFD400B68250 /* Info.plist */,
 				0C6BF47726BFEFD400B68250 /* Preview Content */,
+				0C9CA89326CA7A35002792E7 /* MemoryGame.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9CA89426CA7A35002792E7 /* MemoryGame.swift in Sources */,
 				0C6BF47426BFEFD400B68250 /* ContentView.swift in Sources */,
 				0C6BF47226BFEFD400B68250 /* MemorizeApp.swift in Sources */,
 			);
