@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//ViewModel 
 class EmojiMemoryGame: ObservableObject {
 	static let vehicleEmojis = ["🚁", "🚗", "✈️", "🛳", "🚄",  "🛸",  "🚀",  "⛵️",
 			"🚲",  "🛵",  "🛴",  "🏍",  "🚃",  "🚒",  "🚑",  "🚌",  "🚎",
