@@ -10,6 +10,7 @@ import Foundation
 // Model
 struct MemoryGame<CardContent> where CardContent: Equatable{
 	private(set) var cards: [Card]
+	private(set) var theme: Theme
 	private var indexOfTheOneAndOnlyFaceUpCard: Int?
 	
 	mutating func choose(_ card: Card) {
@@ -38,13 +39,15 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 		}
 	}
 	
-	init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
+	init(numberOfPairsOfCards: Int, theme: Theme, createCardContent: (Int) -> CardContent) {
 		cards = []
+		self.theme = theme
 		for pairIndex in 0..<numberOfPairsOfCards  {
 			let content = createCardContent(pairIndex)
 			cards.append(Card(id: pairIndex * 2, content: content))
 			cards.append(Card(id: pairIndex * 2 + 1, content: content))
 		}
+		cards = cards.shuffled()
 	}
 	
 	struct Card: Identifiable {
@@ -57,7 +60,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 	
 	struct Theme {
 		var name: String
-		var emojis: [String]
+		var content: [CardContent]
 		var numberOfPairsOfCards: Int
 		var color: String
 	}
