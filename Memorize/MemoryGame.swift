@@ -54,4 +54,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 		var isMatched: Bool = false
 		var content: CardContent
 	}
+	
+	struct Theme {
+		var name: String
+		var emojis: [String]
+		var numberOfPairsOfCards: Int
+		var color: String
+	}
 }
