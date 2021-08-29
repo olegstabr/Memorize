@@ -100,6 +100,20 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 		var content: [CardContent]
 		var numberOfPairsOfCards: Int
 		var color: String
+		
+		init(name: String, content: [CardContent], numberOfPairsOfCards: Int, color: String) {
+			self.name = name
+			self.content = content
+			self.numberOfPairsOfCards = numberOfPairsOfCards
+			self.color = color
+		}
+		
+		init(name: String, content: [CardContent], color: String) {
+			self.name = name
+			self.content = content
+			self.color = color
+			self.numberOfPairsOfCards = self.content.count
+		}
 	}
 	
 	struct Score {

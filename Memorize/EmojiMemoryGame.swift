@@ -22,12 +22,12 @@ class EmojiMemoryGame: ObservableObject {
 					  "🍍", "🥦", "🫑", "🍔", "🌭", "🌯"]
 	static let flagEmojis = ["🏴‍☠️", "🇦🇺", "🏳️‍🌈", "🏳️‍⚧️", "🇦🇷", "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇻🇮", "🇬🇦", "🇹🇱",
 					  "🇯🇪", "🇨🇦", "🇰🇬", "🇷🇺", "🇲🇰", "🇸🇲"]
-	static let themeNames = [(name: "Транспорт", content: vehicleEmojis),
-							 (name: "Люди", content: peopleEmojis),
-							 (name: "Животные", content: animalEmojis),
-							 (name: "Спорт", content: sportEmojis),
-							 (name: "Еда", content: foodEmojis),
-							 (name: "Флаги", content: flagEmojis),]
+	static let themesInfo = [(name: "Транспорт", content: vehicleEmojis, color: "yellow"),
+							 (name: "Люди", content: peopleEmojis, color: "green"),
+							 (name: "Животные", content: animalEmojis, color: "yellow"),
+							 (name: "Спорт", content: sportEmojis, color: "pink"),
+							 (name: "Еда", content: foodEmojis, color: "purple"),
+							 (name: "Флаги", content: flagEmojis, color: "blue")]
 	
 //	static func createMemoryGame() -> MemoryGame<String> {
 //		MemoryGame<String>(numberOfPairsOfCards: 4) { pairIndex in
@@ -43,7 +43,7 @@ class EmojiMemoryGame: ObservableObject {
 	}
 	
 	@Published private var model: MemoryGame<String> =
-		createThemedMemoryGame(name: themeNames[0].name, emojis: themeNames[0].content, cardsCount: 8, color: "green")
+		createThemedMemoryGame(name: themesInfo[0].name, emojis: themesInfo[0].content, cardsCount: 8, color: "red")
 	
 	var cards: [MemoryGame<String>.Card] {
 		model.cards
@@ -57,6 +57,27 @@ class EmojiMemoryGame: ObservableObject {
 		model.score
 	}
 	
+	var themeColor: Color {
+		switch model.theme.color {
+		case "red":
+			return .red
+		case "green":
+			return .green
+		case "yellow":
+			return .yellow
+		case "pink":
+			return .pink
+		case "purple":
+			return .purple
+		case "blue":
+			return .blue
+		case "orange":
+			return .orange
+		default:
+			return .red
+		}
+	}
+	
 	
 	// MARK: - Intent(s)
 	
@@ -66,9 +87,9 @@ class EmojiMemoryGame: ObservableObject {
 	
 	func createNewRandomTheme() {
 		let randomСardCount = Int.random(in: 1..<100)
-		let randomThemeNumber = Int.random(in: 0..<EmojiMemoryGame.themeNames.count)
-		let themeNameAndContent = EmojiMemoryGame.themeNames[randomThemeNumber]
+		let randomThemeNumber = Int.random(in: 0..<EmojiMemoryGame.themesInfo.count)
+		let themeInfo = EmojiMemoryGame.themesInfo[randomThemeNumber]
 		model =
-			EmojiMemoryGame.createThemedMemoryGame(name: themeNameAndContent.name, emojis: themeNameAndContent.content, cardsCount: randomСardCount, color: "green")
+			EmojiMemoryGame.createThemedMemoryGame(name: themeInfo.name, emojis: themeInfo.content, cardsCount: randomСardCount, color: themeInfo.color)
 	}
 }
