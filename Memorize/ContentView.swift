@@ -31,6 +31,7 @@ struct ContentView: View {
 					Spacer()
 				}
 			}
+			.foregroundColor(viewModel.themeColor)
 			.padding(.horizontal)
 			ScrollView {
 				LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
