@@ -48,7 +48,6 @@ struct ContentView: View {
 		}
 		.padding(.horizontal)
 		.font(.largeTitle)
-		.padding(.horizontal)
     }
 }
 
