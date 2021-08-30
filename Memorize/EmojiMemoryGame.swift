@@ -13,20 +13,20 @@ class EmojiMemoryGame: ObservableObject {
 	typealias Theme = MemoryGame<String>.Theme
 	typealias Score = MemoryGame<String>.Score
 	
-	static let vehicleEmojis = ["🚁", "🚗", "✈️", "🛳", "🚄",  "🛸",  "🚀",  "⛵️",
+	private static let vehicleEmojis = ["🚁", "🚗", "✈️", "🛳", "🚄",  "🛸",  "🚀",  "⛵️",
 			"🚲",  "🛵",  "🛴",  "🏍",  "🚃",  "🚒",  "🚑",  "🚌",  "🚎",
 			"🚓",  "🚕",  "🚜", "🛻", "🛺", "🚇", "🛶"]
-	static let peopleEmojis = ["👶", "👩", "👨🏽‍🦰", "🧔‍♀️", "👨‍🦳", "👮", "🕵️‍♀️", "👩‍🌾", "💂‍♀️",
+	private static let peopleEmojis = ["👶", "👩", "👨🏽‍🦰", "🧔‍♀️", "👨‍🦳", "👮", "🕵️‍♀️", "👩‍🌾", "💂‍♀️",
 						"👨‍⚕️", "👨‍🎓", "👩‍🏫", "👨‍💻", "👩‍🚒", "🧑‍🚀", "🧑‍⚖️", "🧙", "🧛‍♀️"]
-	static let animalEmojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️",
+	private static let animalEmojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️",
 						"🐨", "🐸", "🐤", "🦅"]
-	static let sportEmojis = ["⚽️", "🏀", "⚾️", "🏈", "🥎", "🎾", "🏐", "🏉", "🥏",
+	private static let sportEmojis = ["⚽️", "🏀", "⚾️", "🏈", "🥎", "🎾", "🏐", "🏉", "🥏",
 					   "🏒", "🏏", "🥋", "🤼‍♂️", "🏋️‍♀️", "🎿", "🏄‍♂️", "🏄", "🏊‍♂️"]
-	static let foodEmojis = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍓", "🫐", "🍑", "🥝",
+	private static let foodEmojis = ["🍏", "🍎", "🍐", "🍊", "🍋", "🍓", "🫐", "🍑", "🥝",
 					  "🍍", "🥦", "🫑", "🍔", "🌭", "🌯"]
-	static let flagEmojis = ["🏴‍☠️", "🇦🇺", "🏳️‍🌈", "🏳️‍⚧️", "🇦🇷", "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇻🇮", "🇬🇦", "🇹🇱",
+	private static let flagEmojis = ["🏴‍☠️", "🇦🇺", "🏳️‍🌈", "🏳️‍⚧️", "🇦🇷", "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇻🇮", "🇬🇦", "🇹🇱",
 					  "🇯🇪", "🇨🇦", "🇰🇬", "🇷🇺", "🇲🇰", "🇸🇲"]
-	static let themesInfo = [(name: "Транспорт", content: vehicleEmojis, color: "yellow"),
+	private static let themesInfo = [(name: "Транспорт", content: vehicleEmojis, color: "yellow"),
 							 (name: "Люди", content: peopleEmojis, color: "green"),
 							 (name: "Животные", content: animalEmojis, color: "yellow"),
 							 (name: "Спорт", content: sportEmojis, color: "pink"),
@@ -39,7 +39,7 @@ class EmojiMemoryGame: ObservableObject {
 //		}
 //	}
 	
-	static func createThemedMemoryGame(name: String, emojis: [String], cardsCount: Int, color: String) -> MemoryGame<String> {
+	private static func createThemedMemoryGame(name: String, emojis: [String], cardsCount: Int, color: String) -> MemoryGame<String> {
 		let theme = MemoryGame<String>.Theme(name: name, content: emojis, numberOfPairsOfCards: cardsCount, color: color)
 		return MemoryGame<String>(theme: theme) {
 			theme.content[$0]

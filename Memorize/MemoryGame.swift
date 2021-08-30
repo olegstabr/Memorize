@@ -41,25 +41,25 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
  		}
 	}
 	
-	mutating func faceDownAllCards() {
+	private mutating func faceDownAllCards() {
 		for index in cards.indices {
 			cards[index].isFaceUp = false
 		}
 	}
 	
-	mutating func resetSeenCards() {
+	private mutating func resetSeenCards() {
 		for index in cards.indices {
 			cards[index].isSeen = false
 		}
 	}
 	
-	func reduceArrayCount(receiveShowCount: inout Int, realArrayCount: Int) {
+	private func reduceArrayCount(receiveShowCount: inout Int, realArrayCount: Int) {
 		if receiveShowCount > realArrayCount {
 			receiveShowCount = realArrayCount
 		}
 	}
 	
-	func checkPairIsUsed(content: CardContent) -> Bool {
+	private func checkPairIsUsed(content: CardContent) -> Bool {
 		if let _ = cards.first(where: { $0.content == content }) {
 			return true
 		}
@@ -89,9 +89,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 	struct Card: Identifiable {
 		var id: Int
 		
-		var isFaceUp: Bool = false
-		var isMatched: Bool = false
-		var isSeen: Bool = false
+		var isFaceUp = false
+		var isMatched = false
+		var isSeen = false
 		var content: CardContent
 	}
 	
