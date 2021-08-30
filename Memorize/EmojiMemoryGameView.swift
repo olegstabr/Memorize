@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-	@ObservedObject var viewModel: EmojiMemoryGame
+	@ObservedObject var game: EmojiMemoryGame
 	
     var body: some View {
 		VStack {
 			VStack {
 				Button(action: {
-					viewModel.createNewRandomTheme()
+					game.createNewRandomTheme()
 				}, label: {
 					HStack {
 						Spacer()
@@ -23,28 +23,28 @@ struct EmojiMemoryGameView: View {
 					.font(.largeTitle)
 				})
 				HStack {
-					Text("Тема: \(viewModel.theme.name)")
+					Text("Тема: \(game.theme.name)")
 					Spacer()
 				}
 				HStack {
-					Text("Счет: \(viewModel.score.total)")
+					Text("Счет: \(game.score.total)")
 					Spacer()
 				}
 			}
-			.foregroundColor(viewModel.themeColor)
+			.foregroundColor(game.themeColor)
 			.padding(.horizontal)
 			ScrollView {
 				LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-					ForEach(viewModel.cards) { card in
-						CardView(card: card, color: viewModel.themeColor)
+					ForEach(game.cards) { card in
+						CardView(card: card, color: game.themeColor)
 							.aspectRatio(2/3, contentMode: .fit)
 							.onTapGesture {
-								viewModel.choose(card)
+								game.choose(card)
 							}
 					}
 				}
 			}
-			.foregroundColor(viewModel.themeColor)
+			.foregroundColor(game.themeColor)
 		}
 		.padding(.horizontal)
 		.font(.largeTitle)
@@ -54,7 +54,7 @@ struct EmojiMemoryGameView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
 		let game = EmojiMemoryGame()
-		EmojiMemoryGameView(viewModel: game)
+		EmojiMemoryGameView(game: game)
     }
 }
 
