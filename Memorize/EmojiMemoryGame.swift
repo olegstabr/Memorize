@@ -9,6 +9,10 @@ import SwiftUI
 
 //ViewModel 
 class EmojiMemoryGame: ObservableObject {
+	typealias Card = MemoryGame<String>.Card
+	typealias Theme = MemoryGame<String>.Theme
+	typealias Score = MemoryGame<String>.Score
+	
 	static let vehicleEmojis = ["🚁", "🚗", "✈️", "🛳", "🚄",  "🛸",  "🚀",  "⛵️",
 			"🚲",  "🛵",  "🛴",  "🏍",  "🚃",  "🚒",  "🚑",  "🚌",  "🚎",
 			"🚓",  "🚕",  "🚜", "🛻", "🛺", "🚇", "🛶"]
@@ -45,15 +49,15 @@ class EmojiMemoryGame: ObservableObject {
 	@Published private var model: MemoryGame<String> =
 		createThemedMemoryGame(name: themesInfo[0].name, emojis: themesInfo[0].content, cardsCount: 8, color: "red")
 	
-	var cards: [MemoryGame<String>.Card] {
+	var cards: [Card] {
 		model.cards
 	}
 	
-	var theme: MemoryGame<String>.Theme {
+	var theme: Theme {
 		model.theme
 	}
 	
-	var score: MemoryGame<String>.Score {
+	var score: Score {
 		model.score
 	}
 	
@@ -81,7 +85,7 @@ class EmojiMemoryGame: ObservableObject {
 	
 	// MARK: - Intent(s)
 	
-	func choose(_ card: MemoryGame<String>.Card) {
+	func choose(_ card: Card) {
 		model.choose(card)
 	}
 	
