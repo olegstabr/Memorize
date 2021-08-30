@@ -12,7 +12,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 	private(set) var cards: [Card]
 	private(set) var theme: Theme
 	private(set) var score: Score
-	private var indexOfTheOneAndOnlyFaceUpCard: Int?
+	
+	private var indexOfTheOneAndOnlyFaceUpCard: Int? {
+		get { cards.indices.filter({ cards[$0].isFaceUp }).oneAndOnly }
+		set { cards.indices.forEach { cards[$0].isFaceUp = ($0 == newValue) } }
+	}
 	
 	mutating func choose(_ card: Card) {
 		if let choosenIndex = cards.firstIndex(where: { $0.id == card.id }),
@@ -26,9 +30,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 					score.match()
 					resetSeenCards()
 				}
-				indexOfTheOneAndOnlyFaceUpCard = nil
+				cards[choosenIndex].isFaceUp = true
 			} else {
-				faceDownAllCards()
 				indexOfTheOneAndOnlyFaceUpCard = choosenIndex
 			}
 			
@@ -36,21 +39,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 				score.penalty()
 			}
 			
-			cards[choosenIndex].isFaceUp.toggle()
 			cards[choosenIndex].isSeen = true
  		}
 	}
 	
-	private mutating func faceDownAllCards() {
-		for index in cards.indices {
-			cards[index].isFaceUp = false
-		}
-	}
-	
 	private mutating func resetSeenCards() {
-		for index in cards.indices {
-			cards[index].isSeen = false
-		}
+		cards.indices.forEach({ cards[$0].isSeen = false })
 	}
 	
 	private func reduceArrayCount(receiveShowCount: inout Int, realArrayCount: Int) {
@@ -128,5 +122,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 		mutating func match() {
 			total += matchCost
 		}
+	}
+}
+
+extension Array {
+	var oneAndOnly: Element? {
+		return count == 1 ? first : nil
 	}
 }
