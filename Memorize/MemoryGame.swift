@@ -24,7 +24,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
 		   !cards[choosenIndex].isMatched
 		{
 			if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
-				if cards[choosenIndex].content == cards[potentialMatchIndex].content {
+				if cards[choosenIndex].content == cards[potentialMatchIndex].content { 
 					cards[choosenIndex].isMatched = true
 					cards[potentialMatchIndex].isMatched = true
 					score.match()
