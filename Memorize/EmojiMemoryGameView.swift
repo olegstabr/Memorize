@@ -33,22 +33,27 @@ struct EmojiMemoryGameView: View {
 			}
 			.foregroundColor(game.themeColor)
 			.padding(.horizontal)
-			ScrollView {
-				LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-					ForEach(game.cards) { card in
-						CardView(card, color: game.themeColor)
-							.aspectRatio(2/3, contentMode: .fit)
-							.onTapGesture {
-								game.choose(card)
-							}
-					}
-				}
+			AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+				cardView(for: card)
 			}
 			.foregroundColor(game.themeColor)
 		}
 		.padding(.horizontal)
 		.font(.largeTitle)
     }
+	
+	@ViewBuilder
+	private func cardView(for card: EmojiMemoryGame.Card) -> some View {
+		if card.isMatched && !card.isFaceUp {
+			Rectangle().opacity(0)
+		} else {
+			CardView(card, color: game.themeColor)
+				.padding(4)
+				.onTapGesture {
+					game.choose(card)
+				}
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -95,8 +100,8 @@ struct CardView: View {
 	}
 	
 	private struct DrawingConstants {
-		static let cornerRadius: CGFloat = 20
+		static let cornerRadius: CGFloat = 10
 		static let lineWidth: CGFloat = 4
-		static let fontScale: CGFloat = 0.8
+		static let fontScale: CGFloat = 0.74
 	}
 }

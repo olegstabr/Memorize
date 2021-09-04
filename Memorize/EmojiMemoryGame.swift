@@ -90,7 +90,7 @@ class EmojiMemoryGame: ObservableObject {
 	}
 	
 	func createNewRandomTheme() {
-		let randomСardCount = Int.random(in: 1..<100)
+		let randomСardCount = Int.random(in: 1..<35)
 		let randomThemeNumber = Int.random(in: 0..<EmojiMemoryGame.themesInfo.count)
 		let themeInfo = EmojiMemoryGame.themesInfo[randomThemeNumber]
 		model =
