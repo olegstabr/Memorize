@@ -8,7 +8,7 @@
 import Foundation
 
 // Model
-struct MemoryGame<CardContent> where CardContent: Equatable{
+struct MemoryGame<CardContent> where CardContent: Equatable {
 	private(set) var cards: [Card]
 	private(set) var theme: Theme
 	private(set) var score: Score
