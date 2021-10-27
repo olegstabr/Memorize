@@ -12,40 +12,59 @@ struct EmojiMemoryGameView: View {
 	
     var body: some View {
 		VStack {
-			VStack {
-				Button(action: {
-					game.createNewRandomTheme()
-				}, label: {
-					HStack {
-						Spacer()
-						Image(systemName: "plus")
-					}
-					.font(.largeTitle)
-				})
-				HStack {
-					Text("Тема: \(game.theme.name)")
-					Spacer()
-				}
-				HStack {
-					Text("Счет: \(game.score.total)")
-					Spacer()
-				}
-			}
-			.foregroundColor(game.themeColor)
-			.padding(.horizontal)
-			AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
-				cardView(for: card)
-			}
-			.foregroundColor(game.themeColor)
+			topMenu
+			gameBody
+			shuffleButton
 		}
 		.padding(.horizontal)
 		.font(.largeTitle)
     }
 	
+	var topMenu: some View {
+		VStack {
+			Button(action: {
+				withAnimation {
+					game.createNewRandomTheme()
+				}
+			}, label: {
+				HStack {
+					Spacer()
+					Image(systemName: "plus")
+				}
+				.font(.largeTitle)
+			})
+			HStack {
+				Text("Тема: \(game.theme.name)")
+				Spacer()
+			}
+			HStack {
+				Text("Счет: \(game.score.total)")
+				Spacer()
+			}
+		}
+		.foregroundColor(game.themeColor)
+		.padding(.horizontal)
+	}
+	
+	var gameBody: some View {
+		AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+			cardView(for: card)
+		}
+		.foregroundColor(game.themeColor)
+	}
+	
+	var shuffleButton: some View {
+		Button("Shuffle") {
+			withAnimation {
+				game.shuffle()
+			}
+		}
+	}
+	
 	@ViewBuilder
 	private func cardView(for card: EmojiMemoryGame.Card) -> some View {
 		if card.isMatched && !card.isFaceUp {
-			Rectangle().opacity(0)
+			Color.clear
 		} else {
 			CardView(card, color: game.themeColor)
 				.padding(4)
