@@ -11,6 +11,15 @@ struct Pie: Shape {
 	var startAngle: Angle
 	var endAngle: Angle
 	var clockwise = false
+	var animatableData: AnimatablePair<Double, Double> {
+		get {
+			AnimatablePair(startAngle.radians, endAngle.radians)
+		}
+		set {
+			startAngle = Angle.radians(newValue.first)
+			endAngle = Angle.radians(newValue.second)
+		}
+	}
 	
 	init(startAngle: Angle, endAngle: Angle, clockwise: Bool = false) {
 		self.startAngle = startAngle - Angle(degrees: 90)

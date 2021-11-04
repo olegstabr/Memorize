@@ -100,4 +100,10 @@ class EmojiMemoryGame: ObservableObject {
 		model =
 			EmojiMemoryGame.createThemedMemoryGame(name: themeInfo.name, emojis: themeInfo.content, cardsCount: randomСardCount, color: themeInfo.color)
 	}
+	
+	func restart() {
+		if let theme = EmojiMemoryGame.themesInfo.first {
+			model =	EmojiMemoryGame.createThemedMemoryGame(name: theme.name, emojis: theme.content, cardsCount: 8, color: "red")
+		}
+	}
 }
